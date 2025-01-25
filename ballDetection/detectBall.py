@@ -1,5 +1,6 @@
 import cv2
 import csv
+import pandas as pd 
 from ultralytics import YOLO
 # Load the YOLOv8 model
 
@@ -10,6 +11,8 @@ def detect_ball(vid_path):
     # Open the video file
     video_path = vid_path
     cap = cv2.VideoCapture(video_path)
+
+    detection_data = []
 
     # Prepare CSV file to save coordinates
     csv_filename = "soccer_ball_coordinates.csv"
@@ -34,6 +37,16 @@ def detect_ball(vid_path):
                     x1, y1, x2, y2, conf, cls = box
 
                     if int(cls) == 32:  # Filter for "sports ball" (COCO class 32)
+                        
+                        detection_data.append({
+                            "Frame": frame_number,
+                            "X1": int(x1),
+                            "Y1": int(y1),
+                            "X2": int(x2),
+                            "Y2": int(y2),
+                            "Confidence": f"{conf:.2f}"
+                        })
+
                         # Draw bounding box
                         cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
                         cv2.putText(frame, f"Soccer Ball: {conf:.2f}", (int(x1), int(y1) - 10),
@@ -54,7 +67,10 @@ def detect_ball(vid_path):
     cv2.destroyAllWindows()
     print(f"Coordinates saved in {csv_filename}")
 
+    df = pd.DataFrame(detection_data)
+    return df
+
 
 #testing
 
-# detect_ball("videos/footy_video.mp4")
+# print(detect_ball("videos/footy_video.mp4"))
