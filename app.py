@@ -38,10 +38,6 @@ def get_ball():
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    finally:
-        # Optional: Clean up the saved video file after processing
-        if os.path.exists(video_path):
-            os.remove(video_path)
 
 if __name__ == '__main__':
     app.run(debug=True)
