@@ -1,7 +1,6 @@
 import cv2
 import csv
 from ultralytics import YOLO
-
 # Load the YOLOv8 model
 
 
@@ -50,7 +49,7 @@ def detect_ball(vid_path):
             cv2.imshow("Soccer Ball Detection", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-
+    
     cap.release()
     cv2.destroyAllWindows()
     print(f"Coordinates saved in {csv_filename}")
