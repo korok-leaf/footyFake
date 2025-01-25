@@ -6,7 +6,7 @@ from ultralytics import YOLO
 
 
 def detect_ball(vid_path):
-    model = YOLO("yolov8m.pt")  # Use 'yolov8l.pt' for better accuracy
+    model = YOLO("yolov8s.pt")  # Use 'yolov8l.pt' for better accuracy
 
     # Open the video file
     video_path = vid_path
