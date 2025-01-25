@@ -14,9 +14,13 @@ def getAngles(pose_path, ball_path, foot):
         y1_ball = bp.iloc[i]['Y1']
         x2_ball = bp.iloc[i]['X2']
         y2_ball = bp.iloc[i]['Y2'] 
-        print(x_lm, y_lm, x1_ball, y1_ball, x2_ball, y2_ball)   
 
-        if x1_ball <= x_lm <= x2_ball and y1_ball <= y_lm <= y2_ball:
+        x_center = (x1_ball + x2_ball) / 2
+        y_center = (y1_ball + y2_ball) / 2
+
+        diff = (x_lm - x_center) ** 2 + (y_lm - y_center) ** 2
+        if diff < min_diff:
+            min_diff = diff
             min_frame = i
     print(min_frame)
 
