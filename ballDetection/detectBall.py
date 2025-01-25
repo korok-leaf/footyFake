@@ -1,7 +1,4 @@
 import cv2
-from ultralytics import YOLO
-
-import cv2
 import csv
 from ultralytics import YOLO
 
